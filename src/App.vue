@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="moon"></div>
-    <div v-for="star in stars" v-bind:key="star.id">
+    <div v-for="star in stars" :key="star.id">
       <div class="star" :style="`left: ${star.x}px; top:${star.y}px`"></div>
     </div>
   </div>
