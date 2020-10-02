@@ -1,12 +1,15 @@
 <template>
   <div id="app">
+    <input type="range" v-model.number="nbStars" min="10" max="500"/>
     <div class="moon"></div>
+    <transition-group name="fade">
     <div
       class="star"
-      v-for="star in totalStars"
+      v-for="star in nbStars"
       :key="star"
       :style="`top: ${getRandomY()}px; left: ${getRandomX()}px;`"
     ></div>
+    </transition-group>
   </div>
 </template>
 
@@ -17,7 +20,7 @@ export default {
   name: "app",
   data() {
     return {
-      totalStars: 200
+      nbStars: 50
     };
   },
   methods: {
@@ -26,6 +29,9 @@ export default {
     },
     getRandomY() {
       return randomY();
+    },
+     getNbStar(nbStars) {
+       console.log(nbStars);
     }
   }
 };
@@ -66,5 +72,16 @@ body {
   right: 10%;
   top: 15%;
   border-radius: 100px;
+}
+
+/* transitions */
+
+.fade-enter-activer,
+.fade-leave-active {
+  transition: opacity .5s;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
 </style>
