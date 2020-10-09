@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <Moon />
+    <Login @clicked="setName($event)"/>
     <transition-group name="fade">
       <common-star 
         v-for="star in totalStars"
@@ -24,19 +25,27 @@
 import CommonStar from "@/components/Common-star";
 import ShootingStar from "@/components/Shooting-star";
 import Moon from "@/components/Moon";
+import Login from "@/components/Login-modal";
 
 export default {
   name: "app",
   components: {
     CommonStar,
     ShootingStar,
-    Moon
+    Moon, 
+    Login
   },
   data() {
     return {
       totalStars: 200,
       isShootingStarVisible: true
     };
+  },
+  methods: {
+    setName(e) {
+      console.log(e)
+      localStorage.setItem('name', e);
+    }
   },
   mounted() {
     setInterval(() => {

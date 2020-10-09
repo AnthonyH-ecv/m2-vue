@@ -1,14 +1,27 @@
 <template>
   <div class="login-wrapper">
     <div class="login-modal">
-
+       <input type="text" v-model='name'>
+       <button v-on:click="onClickButton()">
+         Submit
+       </button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "LoginModal"
+  name: "LoginModal",
+  data() {
+    return {
+      name: ''
+    }
+  },
+  methods: {
+    onClickButton (value) {
+      this.$emit('clicked', this.name)
+    }
+  }
 };
 </script>
 
