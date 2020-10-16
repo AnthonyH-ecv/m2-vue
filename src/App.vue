@@ -2,7 +2,7 @@
   <div id="app">
     <transition name="fade">
       <login-modal
-        v-if="!isLoggedIn"
+        v-if="!isLoggedIn && showModal"
         @onSubmitLogin="setLogin"
       />
     </transition>
@@ -44,7 +44,8 @@ export default {
     return {
       userName: "",
       totalStars: 200,
-      isShootingStarVisible: true
+      isShootingStarVisible: true,
+      showModal: true
     };
   },
   computed: {
@@ -58,7 +59,13 @@ export default {
       localStorage.setItem("userName", userName);
     }
   },
+  created() {
+    if(localStorage.getItem('userName')){
+          this.showModal = false
+    }
+  },
   mounted() {
+  
     setInterval(() => {
       this.isShootingStarVisible = !this.isShootingStarVisible;
     }, 6000);
@@ -69,6 +76,7 @@ export default {
 <style lang="scss">
 body {
   margin: 0;
+  overflow: hidden;
 }
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
